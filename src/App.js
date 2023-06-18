@@ -7,6 +7,8 @@ function App() {
   const numberOfDie = 10
   const [dice, setDice] = React.useState(getAllNewDice())
   const [tenzies, setTenzies] = React.useState(false)
+  const [rollCount, setRollCount] = React.useState(1)
+  const [rollRecord, setRollRecord] = React.useState(JSON.parse(localStorage.getItem("rollRecord")) || null)
 
   function areAllDiceHeld() {
     return dice.every(die => die.isHeld)
@@ -20,6 +22,10 @@ function App() {
   React.useEffect(() => {
     if(areAllDiceHeld() && areAllDiceTheSame()) {
       setTenzies(true)
+      if(rollRecord === null || rollRecord > rollCount) {
+        localStorage.setItem("rollRecord", JSON.stringify(rollCount))
+        setRollRecord(rollCount)
+      }
     }
     else setTenzies(false)
   }, [dice])
@@ -64,10 +70,12 @@ function App() {
             : getNewDie()
         })
       })
+      setRollCount(prevRollCount => prevRollCount + 1)
     }
 
     function playAgain() {
       setDice(getAllNewDice())
+      setRollCount(1)
     }
 
   return (
@@ -80,6 +88,8 @@ function App() {
       {!tenzies && <button onClick={rollDice} className="app--roll-button">Roll</button>}
       {tenzies && <button onClick={playAgain} className="app--roll-button">Play again</button>}
       {tenzies && <Confetti />}
+      {tenzies && <span>You made it in {rollCount} roll{rollCount>1 ? "s" : ""}!</span>}
+      {tenzies && (rollRecord === rollCount || rollRecord === null) && <span>New record !</span>}
     </div>
   );
 }
