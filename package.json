@@ -4,6 +4,7 @@
   "repository": {
     "url": "git+https://github.com/jeannepietropaoli/tenzies.git"
   },
+  "homepage": "https://jeannepietropaoli.github.io/tenzies",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
