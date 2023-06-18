@@ -2,13 +2,9 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Warning
-
-Work in progress
-
 ## Live version
 
-Not avaiblable yet
+https://jeannepietropaoli.github.io/tenzies/
 
 ## Description
 
