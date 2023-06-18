@@ -1,6 +1,9 @@
 {
   "name": "tenzies",
   "version": "0.1.0",
+  "repository": {
+    "url": "git+https://github.com/jeannepietropaoli/tenzies.git"
+  },
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
