@@ -1,6 +1,7 @@
 import React from "react";
 import Die from "./Die"
 import { nanoid } from "nanoid";
+import Confetti from "react-confetti";
 
 function App() {
   const numberOfDie = 10
@@ -50,7 +51,6 @@ function App() {
         })
       })
     }
-    console.log(dice)
 
     const dieElements = dice.map((die, index) => {
         return (<Die key={die.id} value={die.value} isHeld={die.isHeld} holdDie={() => holdDie(die.id)}/>)
@@ -79,6 +79,7 @@ function App() {
         </div>
       {!tenzies && <button onClick={rollDice} className="app--roll-button">Roll</button>}
       {tenzies && <button onClick={playAgain} className="app--roll-button">Play again</button>}
+      {tenzies && <Confetti />}
     </div>
   );
 }
