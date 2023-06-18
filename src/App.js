@@ -5,6 +5,23 @@ import { nanoid } from "nanoid";
 function App() {
   const numberOfDie = 10
   const [dice, setDice] = React.useState(getAllNewDice())
+  const [tenzies, setTenzies] = React.useState(false)
+
+  function areAllDiceHeld() {
+    return dice.every(die => die.isHeld)
+  }
+
+  function areAllDiceTheSame() {
+    const firstDiceValue = dice[0].value
+    return dice.every(die => die.value === firstDiceValue)
+  }
+
+  React.useEffect(() => {
+    if(areAllDiceHeld() && areAllDiceTheSame()) {
+      setTenzies(true)
+    }
+    else setTenzies(false)
+  }, [dice])
 
   function getNewDie() {
     return ({
@@ -49,6 +66,10 @@ function App() {
       })
     }
 
+    function playAgain() {
+      setDice(getAllNewDice())
+    }
+
   return (
     <div className="app">
       <h1 className="app--title">Tenzies</h1>
@@ -56,7 +77,8 @@ function App() {
       <div className="dice">
             {dieElements}
         </div>
-      <button onClick={rollDice} className="app--roll-button">Roll</button>
+      {!tenzies && <button onClick={rollDice} className="app--roll-button">Roll</button>}
+      {tenzies && <button onClick={playAgain} className="app--roll-button">Play again</button>}
     </div>
   );
 }
